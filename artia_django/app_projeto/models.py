@@ -1,3 +1,8 @@
 from django.db import models
+from app_home.models import Base
 
-# Create your models here.
+
+class Projeto(Base):
+
+    def __str__(self):
+        return self.nome

@@ -1,1 +1,32 @@
-<h1>Home</h1>
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<div class="container text-center bg-success mt-2 mb-2 p-4">
+    <h1 class="text">Home</h1>
+    <div class="divider"></div>
+    <div class="bg-danger">
+        <table class="table table-striped table-dark">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Projeto</th>
+                <th scope="col">Data Inicio</th>
+                <th scope="col">Data Fim</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for projeto in projetos %}
+                <tr>
+                    <th scope="row">{{ projeto.id }}</th>
+                    <td>{{ projeto }}</td>
+                    <td>{{ projeto.data_inicio }}</td>
+                    <td>{{ projeto.data_fim }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
