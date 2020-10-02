@@ -3,9 +3,45 @@
 {% load static %}
 
 <div class="container text-center bg-success mt-2 mb-2 p-4">
-
-    {{ projeto }}
-
+    <div class="row">
+        <div class="col-sm">
+            <h1 style="font-size: 4em;" class="text text-danger">{{ projeto }}</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm">
+            <h4 class="text text-md-right text-light">% Completo: {{ perc }}%</h4>
+        </div>
+        <div class="col-sm">
+            <h4 class="text text-md-left">Atrasado: {{ atrasado }}</h4>
+        </div>
+    </div>
+    <hr style="background-color: darkslategrey;">
+    <div class="">
+        <h1 class="text-center">Atividades</h1>
+        <table class="table table-striped table-dark">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Atividade</th>
+                <th scope="col">Data Inicio</th>
+                <th scope="col">Data Fim</th>
+                <th scope="col">Finalizada?</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for a in atividades %}
+                    <tr>
+                        <th scope="row">{{ a.id }}</th>
+                        <td>{{ a }}</td>
+                        <td>{{ a.data_inicio }}</td>
+                        <td>{{ a.data_fim }}</td>
+                        <td>{% if a.finalizada is True %}Sim{% else %}Não{% endif %}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+    </div>
 </div>
 
 {% endblock %}

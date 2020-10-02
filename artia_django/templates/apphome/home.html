@@ -13,15 +13,19 @@
                 <th scope="col">Projeto</th>
                 <th scope="col">Data Inicio</th>
                 <th scope="col">Data Fim</th>
+                <th scope="col">% Completo</th>
+                <th scope="col">Atrasado</th>
               </tr>
             </thead>
             <tbody>
             {% for projeto in projetos %}
                 <tr>
-                    <th scope="row">{{ projeto.id }}</th>
-                    <td>{{ projeto }}</td>
-                    <td>{{ projeto.data_inicio }}</td>
-                    <td>{{ projeto.data_fim }}</td>
+                    <th scope="row">{{ projeto.projeto.id }}</th>
+                    <td><a class="link" href="{% url 'appprojeto:projeto' projeto.projeto projeto.projeto.id %}">{{ projeto.projeto }}</a></td>
+                    <td>{{ projeto.projeto.data_inicio }}</td>
+                    <td>{{ projeto.projeto.data_fim }}</td>
+                    <td>{{ projeto.perc}}%</td>
+                    <td>{{ projeto.atrasado}}</td>
                 </tr>
             {% endfor %}
             </tbody>
