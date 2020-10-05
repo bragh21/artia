@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<div class="container">
+    <form class="p-5" action="" method="POST">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-group row"> 
+                {{ field.errors }}
+                {{ field.label_tag }} {{ field }}
+                {% if field.help_text %}
+                <p class="help">{{ field.help_text|safe }}</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <input type="submit" class="btn btn-primary" value="Send">
+    </form>
+</div>
+
+<script>
+    $(function (){
+        $("#id_data_incio").datepicker();
+        $("#id_data_fim").datepicker();
+    })
+</script>
+
+{% endblock %}

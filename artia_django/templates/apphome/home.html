@@ -2,10 +2,10 @@
 {% block content %}
 {% load static %}
 
-<div class="container text-center bg-success mt-2 mb-2 p-4">
+<div class="container text-center mt-2 mb-2 p-4">
     <h1 class="text">Home</h1>
     <div class="divider"></div>
-    <div class="bg-danger">
+    <div class="table-responsive">
         <table class="table table-striped table-dark">
             <thead>
               <tr>
@@ -21,16 +21,19 @@
             {% for projeto in projetos %}
                 <tr>
                     <th scope="row">{{ projeto.projeto.id }}</th>
-                    <td><a class="link" href="{% url 'appprojeto:projeto' projeto.projeto projeto.projeto.id %}">{{ projeto.projeto }}</a></td>
-                    <td>{{ projeto.projeto.data_inicio }}</td>
-                    <td>{{ projeto.projeto.data_fim }}</td>
+                    <td><a class="link" href="{% url 'appprojeto:projeto' projeto.projeto projeto.projeto.id %}"><button class="btn btn-outline-primary btn-sm">{{ projeto.projeto }}</button></a></td>
+                    <td class="text text-info">{{ projeto.projeto.data_inicio }}</td>
+                    <td class="text text-warning">{{ projeto.projeto.data_fim }}</td>
                     <td>{{ projeto.perc}}%</td>
-                    <td>{{ projeto.atrasado}}</td>
+                    <td class="text {% if projeto.atrasado == 'Sim' %}text-danger{% else %}text-success{% endif %}">
+                        {{ projeto.atrasado}}
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
     </div>
+    <div class="text-md-right m-2"><a style="text-decoration: none;" href="{% url 'appprojeto:projeto_add' %}"><button type="button" class="btn btn-primary">+</button></a></div>
 </div>
 
 {% endblock %}

@@ -1,9 +1,12 @@
-from django.shortcuts import render
-from django.views.generic import TemplateView
-from django.http import Http404
+from django.shortcuts import render, redirect
+from django.views.generic import TemplateView, View
+from django.http import Http404, HttpResponseBadRequest
+from django.urls import reverse
 
 from .models import Projeto
 from app_atividade.models import Atividade
+
+from .forms import ProjetoForm
 
 
 class ProjetoView(TemplateView):
@@ -23,7 +26,30 @@ class ProjetoView(TemplateView):
         else:
             raise Http404
 
-        return context 
+        return context
+
+class ProjetoAddView(View):
+    def get(self, request, *args, **kwargs):
+        context = {
+            'title': 'Adicionar Projeto | ARTIA',
+            'form': ProjetoForm()
+        }
+        return render(request, 'appprojeto/projeto_form.html', context)
+
+    def post(self, request, *args, **kwargs):
+        form = ProjetoForm(request.POST)
+        if form.is_valid():
+            try:
+                projeto = Projeto.objects.create(
+                    nome=form.cleaned_data['nome'],
+                    data_inicio=form.cleaned_data['data_inicio'],
+                    data_fim=form.cleaned_data['data_fim']
+                )
+            except:
+                return HttpResponseBadRequest("Something wrong with your inputs!")
+
+            return redirect(reverse('appprojeto:projeto', kwargs={'nome': projeto.nome, 'pk': projeto.id}))
+        return HttpResponseBadRequest("Something wrong with your inputs!")
 
 
 def check_percentage(atividades):
