@@ -12,7 +12,7 @@ novas ativiades ao mesmo, onde tambem deve inserir as datas de incio e fim, nome
 A % de conclusao do projeto, e a verificacao de atraso sao efetuadas ao carregar a pagina home e a pagina do projeto,
 e sao exibidas em ambas
 
-#### Tabela Projetos
+#### Tabela Projetos/Home
 ![home](https://user-images.githubusercontent.com/36168066/95211517-12c74b00-07c3-11eb-88ed-cd363740ef02.png)
 
 ## Exemplos
